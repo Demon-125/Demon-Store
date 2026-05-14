@@ -514,7 +514,11 @@ ul { list-style: none; }
   transition: var(--transition); font-family: 'Outfit', sans-serif;
 }
 .btn-order:hover { background: rgba(37,211,102,0.22); transform: translateY(-2px); box-shadow: 0 0 20px rgba(37,211,102,0.2); }
-.wa-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.wa-icon { width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; object-fit: cover; }
+
+.btn-contact .wa-icon {
+  position: absolute; left: 24px;
+}
 
 /* Tombol lihat daftar harga FF */
 .btn-ff-list {
@@ -648,9 +652,9 @@ ul { list-style: none; }
 
 .btn-contact {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 12px 24px; border-radius: 99px;
+  padding: 12px 24px 12px 54px; border-radius: 99px;
   font-weight: 700; font-size: 14px; transition: var(--transition);
-  width: 100%;
+  width: 100%; position: relative; text-align: center;
 }
 .btn-contact.wa {
   background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.4); color: #25d366;
@@ -672,6 +676,26 @@ ul { list-style: none; }
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
 }
 .btn-contact.tiktok:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+
+.btn-contact.youtube {
+  background: rgba(255,0,0,0.12); border: 1px solid rgba(255,0,0,0.4); color: #ff3333;
+}
+.btn-contact.youtube:hover { background: rgba(255,0,0,0.22); transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,0,0,0.3); }
+
+.btn-contact.discord {
+  background: rgba(88,101,242,0.12); border: 1px solid rgba(88,101,242,0.4); color: #5865f2;
+}
+.btn-contact.discord:hover { background: rgba(88,101,242,0.22); transform: translateY(-2px); box-shadow: 0 0 20px rgba(88,101,242,0.3); }
+
+.btn-contact.telegram {
+  background: rgba(0,136,204,0.12); border: 1px solid rgba(0,136,204,0.4); color: #0088cc;
+}
+.btn-contact.telegram:hover { background: rgba(0,136,204,0.22); transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,136,204,0.3); }
+
+.btn-contact.facebook {
+  background: rgba(24,119,242,0.12); border: 1px solid rgba(24,119,242,0.4); color: #1877f2;
+}
+.btn-contact.facebook:hover { background: rgba(24,119,242,0.22); transform: translateY(-2px); box-shadow: 0 0 20px rgba(24,119,242,0.3); }
 
 .contact-buttons-wrapper {
   display: flex; flex-direction: column; gap: 12px; margin-top: 10px;
@@ -709,6 +733,24 @@ ul { list-style: none; }
 .order-steps li::before {
   content: counter(steps); position: absolute; left: 12px;
   color: var(--orange); font-weight: 800; font-size: 13px;
+}
+
+/* ========== PROFILE OVERRIDES ========== */
+#profile .contact-grid {
+  grid-template-columns: 1fr;
+  max-width: 100%;
+  margin: 0;
+}
+
+#profile .contact-logo {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80px;
+  height: 80px;
+}
+
+#profile .contact-card {
+  padding: 48px;
 }
 
 /* ========== VERIFY ========== */
