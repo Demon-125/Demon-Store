@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Akun - Demon Store</title>
+  <meta name="description" content="Detail akun Free Fire - Demon Store" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .detail-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 24px 40px; /* Ditambah padding-top agar tidak tertutup fixed navbar */
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb a {
+      color: var(--orange);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--yellow);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+
+    .detail-gallery-section {
+      grid-column: 1;
+      width: 100%;
+      margin-bottom: 48px;
+    }
+
+    .detail-info-section {
+      grid-column: 1;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 0;
+      padding: 0 0;
+    }
+
+    .detail-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      order: 2;
+    }
+
+    .detail-info-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      order: 1;
+    }
+
+    /* ===== LEFT SIDE: IMAGE GALLERY ===== */
+    .detail-gallery-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .detail-gallery-carousel {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 0 40px;
+      box-shadow: 0 0 28px rgba(255, 107, 0, 0.15);
+      backdrop-filter: blur(4px);
+    }
+
+    .detail-main-image {
+      width: 100%;
+      max-width: 640px;
+      aspect-ratio: 3 / 4;
+      background: transparent;
+      border: 2px solid rgba(255, 107, 0, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(255, 107, 0, 0.2);
+      transition: box-shadow 0.3s ease;
+      margin: 0 auto;
+    }
+
+    .detail-main-image:hover {
+      box-shadow: 0 0 28px rgba(255, 107, 0, 0.45);
+    }
+
+    .detail-gallery-carousel:hover {
+      box-shadow: 0 0 40px rgba(255, 107, 0, 0.25);
+      border-color: rgba(255, 107, 0, 0.4);
+    }
+
+    .detail-images-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-image-item {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .detail-image-item.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .detail-image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .detail-carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 107, 0, 0.25);
+      border: 2px solid rgba(255, 107, 0, 0.5);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(255, 107, 0, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .detail-carousel-arrow:hover {
+      background: rgba(255, 107, 0, 0.5);
+      border-color: rgba(255, 107, 0, 0.8);
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+    }
+
+    .detail-carousel-prev {
+      left: 12px;
+    }
+
+    .detail-carousel-next {
+      right: 12px;
+    }
+
+    .detail-carousel-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .detail-carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1.5px solid rgba(255, 107, 0, 0.4);
+    }
+
+    .detail-carousel-dot:hover {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(255, 107, 0, 0.7);
+    }
+
+    .detail-carousel-dot.active {
+      background: #ff6b00;
+      border-color: #ff6b00;
+      width: 24px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(255, 107, 0, 0.6);
+    }
+
+    .detail-thumbnails {
+      display: none;
+    }
+
+    .detail-thumb {
+      display: none;
+    }
+
+    /* ===== RIGHT SIDE: INFO ===== */
+    .detail-info-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 0;
+      grid-column: 1;
+    }
+
+    .detail-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .detail-title-group {
+      flex: 1;
+      width: 100%;
+    }
+
+    .detail-category-badge {
+      display: inline-block;
+      background: #e74c3c;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .detail-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #f39c12;
+      margin-bottom: 12px;
+    }
+
+    .detail-account-info {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 12px 16px;
+      background: rgba(255,107,0,0.08);
+      border: 2px solid var(--orange);
+      border-radius: 8px;
+      width: 100%;
+      align-items: center;
+      box-shadow: 0 0 12px rgba(255, 107, 0, 0.15);
+    }
+
+    .detail-account-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-account-info-label {
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-price-section {
+      padding: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .detail-price {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .detail-price-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #3498db;
+    }
+
+    .detail-buttons {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    .detail-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .detail-btn-primary {
+      background: linear-gradient(135deg, #27ae60, #229954);
+      color: #fff;
+    }
+
+    .detail-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(39,174,96,0.4);
+    }
+
+    /* ===== SPECIFICATIONS ===== */
+    .detail-specs {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .detail-specs-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .detail-spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 6px;
+    }
+
+    .detail-spec-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-spec-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ===== DESCRIPTION ===== */
+    .detail-description {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .detail-description-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-description-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ===== BUYER INSTRUCTIONS ===== */
+    .detail-instructions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .detail-instructions-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-instructions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .detail-instruction-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .detail-instruction-number {
+      min-width: 24px;
+      width: 24px;
+      height: 24px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .detail-instruction-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    /* Desktop - Border kuning untuk image */
+    @media (min-width: 1024px) {
+      .detail-gallery-carousel {
+        padding: 0 60px;
+        border: 2px solid rgba(255, 193, 7, 0.3);
+        box-shadow: 0 0 36px rgba(255, 193, 7, 0.2);
+      }
+
+      .detail-main-image {
+        max-width: 740px;
+        aspect-ratio: 3 / 4;
+        border: 3px solid var(--yellow);
+        box-shadow: 0 0 30px rgba(255, 193, 7, 0.35);
+      }
+
+      .detail-main-image:hover {
+        box-shadow: 0 0 45px rgba(255, 193, 7, 0.5);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .detail-container {
+        padding: 85px 16px 24px; /* Ditambah padding-top agar lolos dari navbar mobile */
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .detail-gallery-section {
+        margin-bottom: 24px;
+        padding: 0;
+      }
+
+      .detail-gallery-carousel {
+        padding: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+
+      .detail-main-image {
+        max-width: 100%;
+        aspect-ratio: 3 / 4;
+        border: 2px solid var(--orange);
+        border-radius: 14px;
+        box-shadow: 0 0 18px rgba(255, 107, 0, 0.3);
+        background: transparent;
+      }
+
+      .detail-info-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .detail-info-left,
+      .detail-info-right {
+        order: initial !important;
+        gap: 20px;
+      }
+
+      .detail-account-info {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        padding: 12px 14px;
+        font-size: 12px;
+      }
+
+      .detail-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+
+      .detail-price-value {
+        font-size: 24px;
+      }
+
+      .detail-specs {
+        padding: 16px;
+      }
+
+      .detail-specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .detail-description {
+        padding: 16px;
+      }
+
+      .detail-instructions {
+        padding: 16px;
+      }
+
+      .detail-carousel-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+        background: rgba(255, 107, 0, 0.3);
+        border: 2px solid rgba(255, 107, 0, 0.5);
+        box-shadow: 0 2px 8px rgba(255, 107, 0, 0.2);
+        backdrop-filter: blur(4px);
+      }
+
+      .detail-carousel-arrow:hover {
+        background: rgba(255, 107, 0, 0.55);
+        border-color: rgba(255, 107, 0, 0.8);
+        box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+      }
+
+      .detail-carousel-prev {
+        left: 12px;
+      }
+
+      .detail-carousel-next {
+        right: 12px;
+      }
+
+      .detail-carousel-dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 107, 0, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .detail-carousel-dot.active {
+        width: 20px;
+        background: #ff6b00;
+        border-color: #ff6b00;
+        border-radius: 4px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .detail-container {
+        padding: 80px 12px 16px; /* Ditambah padding-top agar lolos dari navbar mobile kecil */
+      }
+
+      .detail-gallery-section {
+        margin-bottom: 20px;
+        padding: 0;
+      }
+
+      .detail-main-image {
+        border-radius: 12px;
+        box-shadow: 0 0 16px rgba(255, 107, 0, 0.3);
+      }
+
+      .detail-specs-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .detail-account-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .detail-carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .detail-carousel-prev {
+        left: 8px;
+      }
+
+      .detail-carousel-next {
+        right: 8px;
+      }
+    }
+
+    /* ========== STOK CARD RIBBONS ========== */
+    .stok-ribbon {
+      position: absolute;
+      top: 25px; /* Slightly lower because container is larger */
+      right: -35px;
+      width: 140px;
+      text-align: center;
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.8px;
+      padding: 6px 0;
+      transform: rotate(45deg);
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .stok-ribbon.ready {
+      background: #00e6a0; /* Teal/emerald green */
+      color: #0c0f12; /* Bold black text */
+    }
+
+    .stok-ribbon.sold-out {
+      background: #ff3333; /* Vibrant red */
+      color: #ffffff; /* Bold white text */
+    }
+
+    .detail-main-image.sold-out img {
+      filter: grayscale(100%) brightness(0.4) contrast(0.9);
+    }
+
+    /* Style status badge when sold out */
+    .detail-container.sold-out #detailStatus {
+      color: #ff3333 !important;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
+    }
+
+    .detail-container.sold-out .detail-account-info {
+      border-color: #ff3333 !important;
+      box-shadow: 0 0 12px rgba(255, 51, 51, 0.15) !important;
+      background: rgba(255, 51, 51, 0.05) !important;
+    }
+
+    /* Hide order button and instructions when sold out */
+    .detail-container.sold-out .detail-buttons {
+      display: none !important;
+    }
+
+    .detail-container.sold-out .detail-instructions {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="logo.jpeg" alt="Demon Store Logo" class="logo-img" />
+        <span class="logo-text">Demon<span class="accent">Store</span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <div class="mobile-nav-header">
+          <div class="nav-logo">
+            <img src="logo.jpeg" alt="Demon Store Logo" class="logo-img" />
+            <span class="logo-text">Demon<span class="accent">Store</span></span>
+          </div>
+          <button class="close-btn" id="closeMenu" aria-label="Close">×</button>
+        </div>
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#profile">Profile</a></li>
+        <li><a href="index.html#products">Produk</a></li>
+        <li><a href="index.html#contact">Kontak</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- DETAIL PAGE -->
+  <div class="detail-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>→</span>
+      <a href="index.html#products">Produk</a>
+      <span>→</span>
+      <a href="index.html#products" onclick="sessionStorage.setItem('activeTab','stok-ff')">STOK FF</a>
+      <span>→</span>
+      <span id="breadcrumb-title">FF-001</span>
+    </div>
+
+    <!-- Main Detail Grid -->
+    <div class="detail-grid">
+      <!-- LEFT: GALLERY FULL WIDTH -->
+      <div class="detail-gallery-section">
+        <div class="detail-gallery-carousel">
+          <div class="detail-main-image">
+            <div class="detail-images-container" id="imagesContainer">
+              <!-- Images will be inserted by JS -->
+            </div>
+            <div class="detail-carousel-dots" id="carouselDots">
+              <!-- Dots will be inserted by JS -->
+            </div>
+          </div>
+          <div class="detail-carousel-arrow detail-carousel-prev" onclick="detailCarouselPrev()"><i class="fas fa-arrow-left"></i></div>
+          <div class="detail-carousel-arrow detail-carousel-next" onclick="detailCarouselNext()"><i class="fas fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- INFO SECTION BELOW GALLERY -->
+      <div class="detail-info-section">
+        <!-- RIGHT COLUMN: HEADER, PRICE, BUTTONS, INSTRUCTIONS -->
+        <div class="detail-info-right">
+          <!-- HEADER -->
+          <div class="detail-header">
+            <div class="detail-title-group">
+              <div class="detail-category-badge" id="detailBadge">FREE FIRE</div>
+              <h1 class="detail-title" id="detailTitle">FF-001</h1>
+              <div class="detail-account-info">
+                <div class="detail-account-info-item">
+                  <span class="detail-account-info-label">SKU:</span>
+                  <span id="detailSKU">FF001-LVL51</span>
+                </div>
+                <div class="detail-account-info-item">
+                  <span class="detail-account-info-label">Status:</span>
+                  <span id="detailStatus">Tersedia</span>
+                </div>
+                <div class="detail-account-info-item">
+                  <span class="detail-account-info-label">Seller:</span>
+                  <span id="detailSeller">Demon Store ⭐</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRICE SECTION -->
+          <div class="detail-price-section">
+            <div class="detail-price">Harga:</div>
+            <div class="detail-price-value" id="detailPrice">Rp 550.000</div>
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="detail-buttons">
+            <button class="detail-btn detail-btn-primary" id="detailBtnOrder" onclick="orderViaWhatsApp()">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width: 16px; height: 16px;" />
+              Order via WhatsApp
+            </button>
+          </div>
+
+          <!-- BUYER INSTRUCTIONS -->
+          <div class="detail-instructions">
+            <div class="detail-instructions-title">👨‍💼 Cara Pembeli Akun</div>
+            <div class="detail-instructions-list">
+              <div class="detail-instruction-item">
+                <div class="detail-instruction-number">1</div>
+                <div class="detail-instruction-text">
+                  <strong>Klik tombol "Order via WhatsApp"</strong> untuk menghubungi admin Demon Store
+                </div>
+              </div>
+              <div class="detail-instruction-item">
+                <div class="detail-instruction-number">2</div>
+                <div class="detail-instruction-text">
+                  <strong>Konfirmasi data akun</strong> dan transfer pembayaran sesuai harga yang tertera
+                </div>
+              </div>
+              <div class="detail-instruction-item">
+                <div class="detail-instruction-number">3</div>
+                <div class="detail-instruction-text">
+                  <strong>Setelah transfer dikonfirmasi</strong>, admin akan mengirimkan username & password akun
+                </div>
+              </div>
+              <div class="detail-instruction-item">
+                <div class="detail-instruction-number">4</div>
+                <div class="detail-instruction-text">
+                  <strong>Login ke akun Anda</strong> dan ubah password untuk keamanan maksimal
+                </div>
+              </div>
+              <div class="detail-instruction-item">
+                <div class="detail-instruction-number">5</div>
+                <div class="detail-instruction-text">
+                  <strong>Nikmati akun Anda!</strong> Hubungi admin jika ada masalah atau pertanyaan teknis
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEFT COLUMN: SPECIFICATIONS, DESCRIPTION -->
+        <div class="detail-info-left">
+          <!-- SPECIFICATIONS -->
+          <div class="detail-specs">
+            <div class="detail-specs-title">📋 Spesifikasi Akun</div>
+            <div class="detail-specs-grid">
+              <div class="detail-spec-item">
+                <div class="detail-spec-label">Level</div>
+                <div class="detail-spec-value" id="specLevel">51</div>
+              </div>
+              <div class="detail-spec-item">
+                <div class="detail-spec-label">Status Email</div>
+                <div class="detail-spec-value" id="specEmail">Terverifikasi</div>
+              </div>
+              <div class="detail-spec-item">
+                <div class="detail-spec-label">Garansi</div>
+                <div class="detail-spec-value" id="specGaransi">15 Hari</div>
+              </div>
+              <div class="detail-spec-item">
+                <div class="detail-spec-label">Kondisi</div>
+                <div class="detail-spec-value" id="specCondition">Siap Main</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESCRIPTION -->
+          <div class="detail-description">
+            <div class="detail-description-title">📝 Deskripsi Akun</div>
+            <div class="detail-description-text" id="detailDesc">
+              Akun Free Fire berkualitas premium siap untuk dimainkan. Dengan berbagai pilihan skin senjata eksklusif dan level yang tinggi, akun ini adalah pilihan sempurna untuk pemain profesional.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top: 60px;">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2025 Demon Store. All rights reserved. | Jual Beli Game Online Terpercaya</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="detail.js"></script>
+</body>
+</html>
