@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -197,6 +198,7 @@
       <div class="category-tabs">
         <button class="tab-btn active" data-tab="all" id="tab-all">Semua</button>
         <button class="tab-btn" data-tab="akun" id="tab-akun">🎮 Akun Game</button>
+        <button class="tab-btn" data-tab="stok-ff" id="tab-stok-ff">📦 STOK FF</button>
         <button class="tab-btn" data-tab="ff" id="tab-ff">🔥 Top Up FF</button>
         <button class="tab-btn" data-tab="ml" id="tab-ml">💎 Top Up ML</button>
         <button class="tab-btn" data-tab="joki" id="tab-joki">⚔️ Joki Game ML</button>
@@ -248,6 +250,73 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" class="wa-icon" />
             Order via WhatsApp
           </a>
+        </div>
+
+        <!-- STOK FF CARDS -->
+        <div class="product-card stok-ff-card" data-category="stok-ff" data-popular="false" onclick="window.location.href='detail.html?id=FF-001'" style="cursor: pointer;">
+          <div class="stok-slider-wrapper">
+            <div class="stok-images-gallery">
+              <img src="FF-001/sampul.png" alt="Profile" class="stok-image active" />
+            </div>
+            <div class="stok-slider-nav stok-slider-prev" onclick="event.stopPropagation(); prevStokImage(this)"><i class="fas fa-arrow-left"></i></div>
+            <div class="stok-slider-nav stok-slider-next" onclick="event.stopPropagation(); nextStokImage(this)"><i class="fas fa-arrow-right"></i></div>
+            <div class="stok-slider-dots">
+              <div class="stok-slider-dot active" onclick="event.stopPropagation(); goToStokImage(this, 0)"></div>
+            </div>
+          </div>
+          <div class="stok-content-wrapper">
+            <div class="stok-badge-category">FREE FIRE</div>
+            <div class="stok-account-id">FF-001</div>
+            <div class="stok-desc"><p>Akun Level 71</p></div>
+            <div class="stok-status">✓ Ready</div>
+            <div class="stok-warranty">✓ Bergaransi</div>
+            <div class="stok-bestseller">⭐ Best Seller</div>
+            <div class="stok-price">Harga: <span>Rp 550.000</span></div>
+          </div>
+        </div>
+
+        <div class="product-card stok-ff-card" data-category="stok-ff" data-popular="false" onclick="window.location.href='detail.html?id=FF-002'" style="cursor: pointer;">
+          <div class="stok-slider-wrapper">
+            <div class="stok-images-gallery">
+              <img src="FF-002/sampul.png" alt="Profile" class="stok-image active" />
+            </div>
+            <div class="stok-slider-nav stok-slider-prev" onclick="event.stopPropagation(); prevStokImage(this)"><i class="fas fa-arrow-left"></i></div>
+            <div class="stok-slider-nav stok-slider-next" onclick="event.stopPropagation(); nextStokImage(this)"><i class="fas fa-arrow-right"></i></div>
+            <div class="stok-slider-dots">
+              <div class="stok-slider-dot active" onclick="event.stopPropagation(); goToStokImage(this, 0)"></div>
+            </div>
+          </div>
+          <div class="stok-content-wrapper">
+            <div class="stok-badge-category">FREE FIRE</div>
+            <div class="stok-account-id">FF-002</div>
+            <div class="stok-desc"><p>Akun Level 70</p></div>
+            <div class="stok-status">✓ Ready</div>
+            <div class="stok-warranty">✓ Bergaransi</div>
+            <div class="stok-bestseller">⭐ Best Seller</div>
+            <div class="stok-price">Harga: <span>Rp 650.000</span></div>
+          </div>
+        </div>
+
+        <div class="product-card stok-ff-card" data-category="stok-ff" data-popular="false" onclick="window.location.href='detail.html?id=FF-003'" style="cursor: pointer;">
+          <div class="stok-slider-wrapper">
+            <div class="stok-images-gallery">
+              <img src="FF-003/sampul.png" alt="Profile" class="stok-image active" />
+            </div>
+            <div class="stok-slider-nav stok-slider-prev" onclick="event.stopPropagation(); prevStokImage(this)"><i class="fas fa-arrow-left"></i></div>
+            <div class="stok-slider-nav stok-slider-next" onclick="event.stopPropagation(); nextStokImage(this)"><i class="fas fa-arrow-right"></i></div>
+            <div class="stok-slider-dots">
+              <div class="stok-slider-dot active" onclick="event.stopPropagation(); goToStokImage(this, 0)"></div>
+            </div>
+          </div>
+          <div class="stok-content-wrapper">
+            <div class="stok-badge-category">FREE FIRE</div>
+            <div class="stok-account-id">FF-003</div>
+            <div class="stok-desc"><p>Akun Level 77</p></div>
+            <div class="stok-status">✓ Ready</div>
+            <div class="stok-warranty">✓ Bergaransi</div>
+            <div class="stok-bestseller">⭐ Best Seller</div>
+            <div class="stok-price">Harga: <span>Rp 2.500.000</span></div>
+          </div>
         </div>
 
         <!-- TOP UP FF – INTRO CARD (tampil di tab Semua) -->

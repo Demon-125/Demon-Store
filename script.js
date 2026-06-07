@@ -2,6 +2,49 @@
 //  DEMON STORE – script.js
 // ============================================
 
+// ---- STOK FF IMAGE SLIDER ----
+function nextStokImage(btn) {
+  const card = btn.closest('.stok-ff-card');
+  const images = card.querySelectorAll('.stok-image');
+  const dots = card.querySelectorAll('.stok-slider-dot');
+  const currentImg = card.querySelector('.stok-image.active');
+  const currentIndex = Array.from(images).indexOf(currentImg);
+  const nextIndex = (currentIndex + 1) % images.length;
+  
+  images.forEach(img => img.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  images[nextIndex].classList.add('active');
+  dots[nextIndex].classList.add('active');
+}
+
+function prevStokImage(btn) {
+  const card = btn.closest('.stok-ff-card');
+  const images = card.querySelectorAll('.stok-image');
+  const dots = card.querySelectorAll('.stok-slider-dot');
+  const currentImg = card.querySelector('.stok-image.active');
+  const currentIndex = Array.from(images).indexOf(currentImg);
+  const prevIndex = (currentIndex - 1 + images.length) % images.length;
+  
+  images.forEach(img => img.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  images[prevIndex].classList.add('active');
+  dots[prevIndex].classList.add('active');
+}
+
+function goToStokImage(dot, index) {
+  const dots = dot.parentElement.querySelectorAll('.stok-slider-dot');
+  const wrapper = dot.closest('.stok-slider-wrapper');
+  const images = wrapper.querySelectorAll('.stok-image');
+  
+  images.forEach(img => img.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  
+  images[index].classList.add('active');
+  dots[index].classList.add('active');
+}
+
 // ---- FF PRICE LIST DATA ----
 const WA = '+6283835989728';
 const ffData = {
@@ -248,7 +291,15 @@ function applyFilter(filter) {
   productCards.forEach(card => {
     const cat     = card.dataset.category;
     const popular = card.dataset.popular === 'true';
-    const show    = filter === 'all' ? popular : (cat === filter);
+
+    let show = false;
+    if (filter === 'all') {
+      // Tab Semua: tampilkan yang popular, kecuali stok-ff
+      show = popular && cat !== 'stok-ff';
+    } else {
+      // Tab kategori: cocokkan persis dengan data-category
+      show = (cat === filter);
+    }
 
     if (show) {
       card.classList.remove('hidden');
@@ -274,10 +325,10 @@ tabBtns.forEach(btn => {
 
       let show = false;
       if (filter === 'all') {
-        // Tab Semua: hanya tampilkan produk berlabel populer
-        show = popular;
+        // Tab Semua: hanya tampilkan produk populer, kecuali stok-ff
+        show = popular && cat !== 'stok-ff';
       } else {
-        // Tab kategori: tampilkan semua produk dalam kategori itu
+        // Tab kategori: cocokkan persis dengan data-category
         show = (cat === filter);
       }
 
@@ -351,3 +402,51 @@ const footerYear = document.querySelector('.footer-bottom p');
 if (footerYear) {
   footerYear.innerHTML = footerYear.innerHTML.replace('2025', new Date().getFullYear());
 }
+
+// ---- DETECT SOLD OUT & READY CARDS ----
+function initializeSoldOutCards() {
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach(card => {
+    const statusEl = card.querySelector('.stok-status');
+    const statusText = statusEl ? statusEl.textContent.trim().toLowerCase() : '';
+    
+    // Check if status is sold out, terjual, or habis, or has class/data-status
+    const isSoldOut = statusText.includes('sold out') || 
+                      statusText.includes('terjual') || 
+                      statusText.includes('habis') || 
+                      card.classList.contains('sold-out') || 
+                      card.getAttribute('data-status') === 'sold-out';
+                      
+    const imgWrapper = card.querySelector('.stok-slider-wrapper');
+    if (imgWrapper) {
+      // Clear any old ribbons first
+      const oldRibbon = imgWrapper.querySelector('.stok-ribbon, .sold-out-ribbon');
+      if (oldRibbon) oldRibbon.remove();
+      
+      const ribbon = document.createElement('div');
+      if (isSoldOut) {
+        card.classList.add('sold-out');
+        ribbon.className = 'stok-ribbon sold-out';
+        ribbon.textContent = 'SOLD OUT';
+      } else {
+        card.classList.remove('sold-out');
+        ribbon.className = 'stok-ribbon ready';
+        ribbon.textContent = 'READY';
+      }
+      imgWrapper.appendChild(ribbon);
+    } else if (isSoldOut) {
+      card.classList.add('sold-out');
+    }
+  });
+}
+
+// ---- RESTORE ACTIVE TAB FROM DETAIL PAGE ----
+window.addEventListener('DOMContentLoaded', () => {
+  initializeSoldOutCards();
+  const savedTab = sessionStorage.getItem('activeTab');
+  if (savedTab) {
+    sessionStorage.removeItem('activeTab');
+    const tabBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+    if (tabBtn) tabBtn.click();
+  }
+});
