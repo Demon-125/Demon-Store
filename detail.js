@@ -65,6 +65,25 @@ const accountsData = {
     },
     description: 'Akun Free Fire terbaik dengan level 77 dan koleksi skin eksklusif terlengkap. Email sudah fully verified dengan dukungan customer service 24/7. Akun ini adalah pilihan premium untuk pemain yang menginginkan pengalaman bermain terbaik dengan berbagai pilihan eksklusif.',
     waPhone: '+6283835989728'
+  },
+  'FF-004': {
+    id: 'FF-004',
+    category: 'FREE FIRE',
+    title: 'FF-004',
+    sku: 'FF004-LVL54',
+    status: 'SOLD OUT',
+    price: 'Rp 250.000',
+    priceRaw: 250000,
+    images: ['FF-004/sampul.png', 'FF-004/profile1.jpeg', 'FF-004/profile2.jpeg', 'FF-004/profile3.jpeg', 'FF-004/profile4.jpeg', 'FF-004/profile5.jpeg', 'FF-004/profile6.jpeg', 'FF-004/profile7.jpeg'],
+    specs: {
+      level: '54',
+      email: 'Terverifikasi',
+      skins: '35+ Skin Pilihan',
+      garansi: '15 Hari',
+      condition: 'Siap Main'
+    },
+    description: 'Akun Free Fire terbaik dengan level 54 dan koleksi skin pilihan. Email sudah fully verified dengan dukungan customer service 24/7. Akun ini adalah pilihan terjangkau untuk pemain yang menginginkan pengalaman bermain yang menyenangkan dengan berbagai pilihan skin.',
+    waPhone: '+6283835989728'
   }
 };
 
