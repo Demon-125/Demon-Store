@@ -109,7 +109,7 @@ const accountsData = {
     category: 'FREE FIRE',
     title: 'FF-006',
     sku: 'FF006-LVL65',
-    status: 'READY',
+    status: 'SOLD OUT',
     price: 'Rp 250.000',
     priceRaw: 250000,
     images: ['FF-006/sampul.png', 'FF-006/profile1.jpeg', 'FF-006/profile2.jpeg', 'FF-006/profile3.jpeg', 'FF-006/profile4.jpeg', 'FF-006/profile5.jpeg', 'FF-006/profile6.jpeg', 'FF-006/profile7.jpeg'],
