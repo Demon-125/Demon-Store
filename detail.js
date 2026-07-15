@@ -122,6 +122,25 @@ const accountsData = {
     },
     description: 'Akun Free Fire terbaik dengan level 65 dan koleksi skin pilihan. Email sudah fully verified dengan dukungan customer service 24/7. Akun ini adalah pilihan terjangkau untuk pemain yang menginginkan pengalaman bermain yang menyenangkan dengan berbagai pilihan skin.',
     waPhone: '+6283835989728'
+  },
+  'FF-007': {
+    id: 'FF-007',
+    category: 'FREE FIRE',
+    title: 'FF-007',
+    sku: 'FF007-LVL62',
+    status: 'TERSEDIA',
+    price: 'Rp 70.000',
+    priceRaw: 70000,
+    images: ['FF-007/sampul.png', 'FF-007/profile1.jpeg', 'FF-007/profile2.jpeg', 'FF-007/profile3.jpeg', 'FF-007/profile4.jpeg', 'FF-007/profile5.jpeg', 'FF-007/profile6.jpeg', 'FF-007/profile7.jpeg'],
+    specs: {
+      level: '62',
+      email: 'Terverifikasi',
+      skins: '35+ Skin Pilihan',
+      garansi: '15 Hari',
+      condition: 'Siap Main'
+    },
+    description: 'Akun Free Fire terbaik dengan level 62 dan koleksi skin pilihan. Email sudah fully verified dengan dukungan customer service 24/7. Akun ini adalah pilihan terjangkau untuk pemain yang menginginkan pengalaman bermain yang menyenangkan dengan berbagai pilihan skin.',
+    waPhone: '+6283835989728'
   }
 };
 
