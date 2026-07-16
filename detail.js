@@ -128,7 +128,7 @@ const accountsData = {
     category: 'FREE FIRE',
     title: 'FF-007',
     sku: 'FF007-LVL62',
-    status: 'TERSEDIA',
+    status: 'SOLD OUT',
     price: 'Rp 70.000',
     priceRaw: 70000,
     images: ['FF-007/sampul.png', 'FF-007/profile1.jpeg', 'FF-007/profile2.jpeg', 'FF-007/profile3.jpeg', 'FF-007/profile4.jpeg', 'FF-007/profile5.jpeg', 'FF-007/profile6.jpeg', 'FF-007/profile7.jpeg'],
