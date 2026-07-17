@@ -147,7 +147,7 @@ const accountsData = {
     category: 'FREE FIRE',
     title: 'FF-008',
     sku: 'FF008-LVL64',
-    status: 'TERSEDIA',
+    status: 'SOLD OUT',
     price: 'Rp 150.000',
     priceRaw: 150000,
     images: ['FF-008/sampul.png', 'FF-008/profile1.jpeg', 'FF-008/profile2.jpeg', 'FF-008/profile3.jpeg', 'FF-008/profile4.jpeg', 'FF-008/profile5.jpeg'],
