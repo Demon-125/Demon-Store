@@ -270,7 +270,7 @@ const accountsData = {
       email: 'Terverifikasi',
       skins: '35+ Skin Pilihan',
       garansi: '15 Hari',
-      condition: 'Siap Main'
+      condition: 'Siap Main '
     },
     description: 'Akun Free Fire terbaik dengan level 77 dan koleksi skin pilihan. Email sudah fully verified dengan dukungan customer service 24/7. Akun ini adalah pilihan terjangkau untuk pemain yang menginginkan pengalaman bermain yang menyenangkan dengan berbagai pilihan skin.',
     waPhone: '+6283835989728'
