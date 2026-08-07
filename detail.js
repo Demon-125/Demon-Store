@@ -260,7 +260,7 @@ const accountsData = {
     id: 'FF-014',
     category: 'FREE FIRE',
     title: 'FF-014',
-    sku: 'FF014-LVL77',
+    sku: 'FF014-LVL77', 
     status: 'SOLD OUT',
     price: 'Rp 1.300.000',
     priceRaw: 1300000,
